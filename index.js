@@ -62,6 +62,7 @@ class DataFromSerial extends EventEmitter {
         }else{
           this.logger.warn('success open port %s', this.portName);
           this.active = true;
+          this.emit("active");
 
           this.port.on('data', (data)=>{
             let packet = new Uint8Array( data );
