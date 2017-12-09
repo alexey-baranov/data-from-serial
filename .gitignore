@@ -1,0 +1,6 @@
+.hgignore
+.hg/*
+log/*
+node_modules/*
+npm-debug.log
+.vscode/*
