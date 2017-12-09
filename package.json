@@ -1,5 +1,5 @@
 {
-  "name": "data_from_serial",
+  "name": "data-from-serial",
   "version": "0.17.1207",
   "description": "Read data from Arduino",
   "main": "index.js",
