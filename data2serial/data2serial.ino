@@ -9,46 +9,39 @@
   в функции "setData" считать нужные датчики и установить данные
 */
 
-/*
-*  тут прочитать состояние ног и установить 
-*/  
-void setData(){
-  setPin(1, 1);
-  setPin(5, 10);
-}
-
-//#define BLINK
-
-//настройки моргания лампочки
-#ifdef BLINK
-int led = 13;
-int show = 1;
-#endif
+int MOTION=2, 
+LED = 13,
+motion=0;
 
 #define PACKET_LEN 260
 int  packetPos = 0;
 byte packet[PACKET_LEN]; //до 255 байт данных + 4 байта  
 
 void setup() {                
-#ifdef BLINK
-  pinMode(led, OUTPUT); 
-#endif
+  pinMode(MOTION, INPUT); 
+  pinMode(LED, OUTPUT); 
   Serial.begin(9600);
 }
 
 void loop() {
-#ifdef BLINK
-//  можно мограть, чтобы видно было что работает
-  if(show) digitalWrite(led, HIGH);
-  else digitalWrite(led, LOW);
-  show = 1 - show;
-#endif
+  motion= digitalRead(MOTION);
+  digitalWrite(LED, motion);
+  
   initPacket();
   setData();
   packet[packet[2]+3] = calcCRC();
   Serial.write(packet, packet[2]+4); 
   delay(1000);
 }
+
+/*
+*  тут прочитать состояние ног и установить 
+*/  
+void setData(){
+//  setPin(1, 1);
+  setPin(5, motion);
+}
+
 
 /*
 *  добавление значения в пакет, добавляется 2 байта: номер пина и значение

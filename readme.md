@@ -20,7 +20,7 @@ DFS.searchDev(9600).then(port=>{
   dfs = new DFS(port, 9600);
 
   //при изменении состояния приходит событие
-  dfs.on('pin_changed', (pinNum, value)=>{
+  dfs.on('pin', (pinNum, value)=>{
     console.log('Изменился ПИН №%s, состояние=%s', pinNum, value);
   });
 },
@@ -33,7 +33,7 @@ DFS.searchDev(9600).then(port=>{
 ------
 
 ```js
-on('pin_changed', (pinNumber, newState)=>{...});
+on('pin', (pinNumber, newState)=>{...});
 ```
 возникает при смене состояния, где newState - boolean
 

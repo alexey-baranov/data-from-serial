@@ -9,6 +9,8 @@ chai.should();
 var DFS = require('../index.js');
 
 describe('Тестирование data2serial', function() {
+  let devicePort
+
   it('должен быть класс DataFromSerial', function() {
     DFS.should.be.a('function');
   });
@@ -22,14 +24,27 @@ describe('Тестирование data2serial', function() {
     this.timeout(25000);
 
     it('должна находить девайс', function(done) {
-      DFS.searchDev(9600).then(()=>{
+      DFS.searchDev(9600).then((port)=>{
         // device = new DFS(port, 9200);
+        devicePort= port
         done();
       },
       err=>{
         console.log('девайс не найден: %s', err);
         done(err);
       });
+    });
+  });
+  describe('#pin', function() {
+    it('показывает изменение ножек', function(done) {
+      this.timeout(20000);
+
+      let device = new DFS(devicePort, 9600);
+      device.on("pin", (PIN, value)=>{
+        console.log(`PIN:${PIN}, value:${value}`)
+      })
+
+      setTimeout(done, 19000)
     });
   });
 });

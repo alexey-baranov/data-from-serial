@@ -14,7 +14,7 @@ class DataFromSerial extends EventEmitter {
 
   constructor(port, baudrate){
     super();
-    this.logger = winston.loggers.get('TERMINAL_DEVICE');
+    this.logger = winston.loggers.get('DataFromSerial');
     this.portName = port;
     this.baudrate = baudrate || BAUDRATE;
     this.active = false;
@@ -45,7 +45,7 @@ class DataFromSerial extends EventEmitter {
             if(this.oldPins[pinNum]==undefined) this.oldPins[pinNum]=0;
                 
             if(this.oldPins[pinNum]!=pinValue){
-              this.emit('pin_changed', pinNum, pinValue);
+              this.emit('pin', pinNum, pinValue);
               this.oldPins[pinNum]=pinValue;
             }
           }
