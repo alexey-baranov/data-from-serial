@@ -45,6 +45,7 @@ class DataFromSerial extends EventEmitter {
             if(this.oldPins[pinNum]==undefined) this.oldPins[pinNum]=0;
                 
             if(this.oldPins[pinNum]!=pinValue){
+              this.logger.info('pin', pinNum, "value", pinValue);
               this.emit('pin', pinNum, pinValue);
               this.oldPins[pinNum]=pinValue;
             }

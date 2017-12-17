@@ -39,7 +39,7 @@ void loop() {
 */  
 void setData(){
 //  setPin(1, 1);
-  setPin(5, motion);
+  setPin(MOTION, motion);
 }
 
 

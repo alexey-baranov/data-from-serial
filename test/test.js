@@ -7,8 +7,6 @@ let winston= require("winston")
 
 chai.should();
 
-var DFS = require('../index.js');
-
 winston.loggers.add("Arduino", {
   transports: [
     new winston.transports.Console({
@@ -19,6 +17,8 @@ winston.loggers.add("Arduino", {
     })]
 })
 winston.loggers.get("Arduino").level = "debug"
+
+var DFS = require('../index.js');
 
 describe('Тестирование data2serial', function() {
   let devicePort
@@ -53,7 +53,7 @@ describe('Тестирование data2serial', function() {
 
       let device = new DFS(devicePort, 9600);
       device.on("pin", (PIN, value)=>{
-        console.log(`PIN:${PIN}, value:${value}`)
+        // console.log(`PIN:${PIN}, value:${value}`)
       })
 
       setTimeout(done, 19000)
