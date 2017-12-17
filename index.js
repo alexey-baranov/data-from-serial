@@ -14,7 +14,7 @@ class DataFromSerial extends EventEmitter {
 
   constructor(port, baudrate){
     super();
-    this.logger = winston.loggers.get('DataFromSerial');
+    this.logger = winston.loggers.get('Arduino');
     this.portName = port;
     this.baudrate = baudrate || BAUDRATE;
     this.active = false;

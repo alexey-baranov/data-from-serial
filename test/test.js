@@ -3,10 +3,22 @@
 /*eslint no-undef:0,no-console:0*/
 
 var chai = require('chai');
+let winston= require("winston")
 
 chai.should();
 
 var DFS = require('../index.js');
+
+winston.loggers.add("Arduino", {
+  transports: [
+    new winston.transports.Console({
+      timestamp: true,
+      colorize: true,
+      label: "Arduino",
+      level: "debug"
+    })]
+})
+winston.loggers.get("Arduino").level = "debug"
 
 describe('Тестирование data2serial', function() {
   let devicePort
