@@ -1,5 +1,6 @@
 'use strict';
 
+let logger = winston.loggers.get('Arduino')
 const SerialPort = require('serialport');
 
 /**
@@ -15,7 +16,7 @@ async function checkDevice(portInfo, oOptions) {
       result = null,
       port = new SerialPort(portInfo.comName, {baudrate});
 
-  console.log('check port: %s',portInfo.comName);
+  logger.info('check port: %s',portInfo.comName);
 
   try{
     /**
@@ -37,7 +38,7 @@ async function checkDevice(portInfo, oOptions) {
           let packet = new Uint8Array(data);
 
           for (let i = 0; i < packet.length; i++) {
-            console.log('  data: %s',packet[i]);
+            logger.log('  data: %s',packet[i]);
             incomingBuf.push(packet[i]);
             if(incomingBuf[0]!=0x55) incomingBuf.length = 0;
             if(incomingBuf.length>1 && incomingBuf[1]!=0xaa) incomingBuf.length = 0;
