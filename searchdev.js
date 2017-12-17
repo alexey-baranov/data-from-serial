@@ -1,7 +1,9 @@
 'use strict';
 
-let logger = winston.loggers.get('Arduino')
 const SerialPort = require('serialport');
+let winston= require("winston")
+let logger = winston.loggers.get('Arduino')
+
 
 /**
  * Send on single port command from <aSend>, wait response and compare answer with <aWait>
